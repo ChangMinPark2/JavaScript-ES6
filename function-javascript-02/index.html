@@ -75,6 +75,8 @@
 
 8. 추억의 별 그리기, 구구단
 <script>
+    const join = sep => _.reduce((a,b) => `${a}${sep}${b}`);
+
     _.go(
         _.range(1, 6),
         _.map(_.range),
@@ -82,6 +84,17 @@
         _.map(_.reduce((a, b) => `${a}${b}`)),
         _.reduce((a, b) => `${a}\n${b}`),
         console.log);
+
+    _.go(
+        _.range(2, 10),
+        _.map(a => _.go(
+            _.range(1, 10),
+            _.map(b => `${a}x${b}=${a * b}`),
+            join('\n')
+        )),
+        join(`\n\n`),
+        console.log
+    )
 </script>
 </body>
 </html>
