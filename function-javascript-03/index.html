@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../fx.js"></script>
+</head>
+<body>
+## 명령형 습관 지우기 - 만능 reduce? No
+
+1. reduce + acc 보다 map + 간단한 함수 + reduce
+<script>
+    const users = [
+        {name: 'AA', age: 36},
+        {name: 'BB', age: 36},
+        {name: 'CC', age: 36},
+        {name: 'DD', age: 36},
+        {name: 'EE', age: 36},
+    ];
+    console.log(
+        _.reduce((total, u) => total + u.age, 0, users));
+
+    console.log(_.reduce((a, b) => a + b,
+    L.map(u => u.age, users)));
+</script>
+2. reduce 하나 보다 map + filter + reduce
+3. query, queryToObject
+</body>
+</html>
