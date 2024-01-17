@@ -50,8 +50,27 @@
             _.reduce(add),
             console.log);
     }
-
     f2(3, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    console.clear()
+</script>
+
+6. while을 range로
+7. 효과를 each로 구분
+
+<script>
+    function f3(end) {
+        let i = 0;
+        while (i < end) {
+            ++i;
+            console.log(i)
+        }
+    }
+    f3(10);
+
+    function f4(end) {
+        _.each(console.log,L.range(1, end, 2)); //레인지만큼 ~~ 하겠다.
+    }
+    f4(10);
 </script>
 </body>
 </html>
