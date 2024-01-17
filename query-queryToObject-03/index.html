@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../fx.js"></script>
+</head>
+<body>
+3. query, queryToObject
+<script>
+    const obj1 = {
+        a: 1,
+        b: undefined,
+        c: 'CC',
+        d: 'DD'
+    };
+
+    //명령형
+    function query1(obj) {
+        let res = '';
+        for (const k in obj) {
+            const v = obj[k];
+            if (v === undefined) continue;
+            if (res == '') res += '&';
+
+        }
+        return res;
+    }
+    console.log(query1(obj1));
+
+    function query2(obj) {
+        return Object
+            .entries(obj)
+            .reduce((query, [k, v]) => {
+                if (v === undefined) return query;
+                return query + k + '=' + v;
+            }, '')
+    }
+    console.log(query2(obj1));
+</script>
+
+</body>
+</html>
