@@ -103,40 +103,56 @@
 5. object
 
 <script>
- const a = [['a, 1'], ['b', 2], ['c, 3']];
- const b = {a: 1, b: 2, c: 3};
+    const a = [['a, 1'], ['b', 2], ['c, 3']];
+    const b = {a: 1, b: 2, c: 3};
 
- const object = entries =>
-     _.go(
-     entries,
-     L.map(([k, v]) => ({ [k] : v})),
-     _.reduce(Object.assign));
+    const object = entries =>
+        _.go(
+            entries,
+            L.map(([k, v]) => ({[k]: v})),
+            _.reduce(Object.assign));
 
- console.log(object(a));
+    console.log(object(a));
 
- let m = new Map();
- m.set('a', 10);
- m.set('b', 20);
- m.set('c', 30);
+    let m = new Map();
+    m.set('a', 10);
+    m.set('b', 20);
+    m.set('c', 30);
 
- console.log(object(m));
+    console.log(object(m));
 
 </script>
 
 6. mapObject
 
 <script>
-    const mapObject = (f, obj)=> _.go(
+    const mapObject = (f, obj) => _.go(
         obj,
         L.entries,
         _.map(([k, v]) => [k, f(v)]),
         object);
 
-    console.log(mapObject(a => a + 10, {a:1, b:2, c:3}));
+    console.log(mapObject(a => a + 10, {a: 1, b: 2, c: 3}));
     // {a: 11, b: 12, c: 13}
 </script>
 
 7. pick
+undefined -> 백에도 넘길 수 없음. 이 값이 나오면 안 되도록 구현하자
+
+<script>
+    const obj2 = {a: 1, b: 2, c: 3, d: 4, e: 5};
+    const pick = (ks, obj) => _.go(
+        ks,
+        _.map(k => [k, obj[k]]),
+        _.filter(([k, v]) => v === undefined),
+        object
+    );
+    // const pick = (ks, obj) => object(_.map(k => [k, obj[k]], ks));
+
+    console.log(pick(['b', 'c', 'z'], obj2));
+    // { b: 2, c: 3 }
+</script>
+
 8. indexBy
 9. indexBy 된 값을 filter 하기
 </body>
