@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="fx.js"></script>
 </head>
 <body>
 ## 이터러블 프로그래밍 혹은 리스트 프로세싱 (Lisp)
@@ -35,12 +33,22 @@
 5. 축약 및 합산을 reduce로
 
 <script>
+    const add = (a, b) => a + b;
     function f2(limit, list) {
-        let acc = 0;
-        for (const a of L.take(limit, L.map(a => a* a, L.filter(a => a % 2, list)))) {
-            acc += a;
-        }
-        console.log(acc);
+        console.log(
+            _.reduce(add, //뽑은걸 더해서 축약한다.
+            L.take(limit, //이 값까지만 뽑고
+            L.map(a => a* a, //모든 값을 제곱한 후
+            L.filter(a => a % 2, list)))) //홀수만
+        );
+
+        //좀 더 읽기 쉽다.
+        _.go(list,
+            L.filter(a => a % 2),
+            L.map(a => a * a),
+            L.take(limit),
+            _.reduce(add),
+            console.log);
     }
 
     f2(3, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
