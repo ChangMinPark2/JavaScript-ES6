@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../fx.js"></script>
+    <title>Document</title>
+</head>
+<body>
+## 안전한 합성에 대해
+1. map으로 합성하기
+<script>
+    const f = x => x + 10;
+    const g = x => x - 5;
+    const fg = x => f(g(x));
+    console.log(fg(10));
+
+    _.go(
+        [10],
+        L.map(fg),
+        _.each(console.log));
+</script>
+2. find 대신 L.filter 써보기
+</body>
+</html>
