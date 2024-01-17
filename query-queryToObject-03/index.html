@@ -21,7 +21,7 @@
         for (const k in obj) {
             const v = obj[k];
             if (v === undefined) continue;
-            if (res == '') res += '&';
+            if (res === '') res += '&';
 
         }
         return res;
@@ -37,6 +37,13 @@
             }, '')
     }
     console.log(query2(obj1));
+
+    function query3(obj) {
+        return _.filter(([k, v]) => v !== undefined,
+        Object.entries(obj));
+    }
+
+    console.log(query3(obj1));
 </script>
 
 </body>
