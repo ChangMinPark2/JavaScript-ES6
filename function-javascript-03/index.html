@@ -23,7 +23,14 @@
     console.log(_.reduce((a, b) => a + b,
     L.map(u => u.age, users)));
 </script>
+
 2. reduce 하나 보다 map + filter + reduce
+<script>
+    console.log(
+    _.reduce(add,
+        _.map(u => u.age),
+        _.filter(u => u.age < 30, users)));
+</script>
 3. query, queryToObject
 </body>
 </html>
