@@ -101,6 +101,28 @@
 </script>
 
 5. object
+
+<script>
+ const a = [['a, 1'], ['b', 2], ['c, 3']];
+ const b = {a: 1, b: 2, c: 3};
+
+ const object = entries =>
+     _.go(
+     entries,
+     L.map(([k, v]) => ({ [k] : v})),
+     _.reduce(Object.assign));
+
+ console.log(object(a));
+
+ let m = new Map();
+ m.set('a', 10);
+ m.set('b', 20);
+ m.set('c', 30);
+
+ console.log(object(m));
+
+</script>
+
 6. mapObject
 7. pick
 8. indexBy
