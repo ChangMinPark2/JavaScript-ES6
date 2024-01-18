@@ -89,11 +89,35 @@ _.go(
     L.map(m => m.get('name')),
     _.each(console.log));
 
-
+console.clear()
 </script>
 
 3. Product, Products
 <script>
+class Product extends Model {}
+class Products extends Collection {
+    totalPrice() {
+        return _.reduce((a, b) => a + b,
+        L.map(p => p.get('price'), this));
+        // return _.go(this,
+        // L.map(p => p.get('price')),
+        // _.reduce((a, b) => a + b));
+
+        // let total = 0;
+        // this._models.forEach(product => {
+        //     product.get('')
+        // })
+    }
+}
+
+const products = new Products();
+products.add(new Product({id:1, price: 10000}));
+console.log(products.totalPrice());
+products.add(new Product({id:3, price: 20000}));
+console.log(products.totalPrice());
+products.add(new Product({id:5, price: 30000}));
+console.log(products.totalPrice());
+
 
 </script>
 </body>
