@@ -36,7 +36,59 @@ console.log(_.reduce(add, s));
 </script>
 
 2. Model, Collection
+클래스를 만들어서 사용자 정의 객체를 어떤식으로 이터러블 프로그래밍과 다루는지 알기.
 <script>
+class Model {
+    constructor(attrs = {}) {
+        this.attrs = attrs;
+    }
+    get(k) {
+        return this.attrs[k];
+    }
+    set(k, v) {
+        this.attrs[k] = v;
+        return this;
+    }
+}
+
+class Collection {
+    constructor(models = []) {
+        this._models = models;
+    }
+    at(idx) {
+        return this._models[idx];
+    }
+
+    add(model) {
+        this._models.push(model);
+        return this;
+    }
+
+    *[Symbol.iterator]() {
+        for (const model of this._models) {
+            yield model;
+        }
+    }
+}
+const coll = new Collection();
+coll.add(new Model({id:1, name:'AA'}));
+coll.add(new Model({id:3, name:'BB'}));
+coll.add(new Model({id:5, name:'CC'}));
+console.log(coll.at(2).get('name'));
+console.log(coll.at(1).get('id'));
+
+// 이렇게 사용하는 것 보다 Collection 내에서 지원하는 이터러블을 이용해보자.
+// _.go(
+//     L.range(3),
+//     L.map(i => coll.at(i)),
+//     L.map(m => m.get('name')),
+//     _.each(console.log))
+
+_.go(
+    coll,
+    L.map(m => m.get('name')),
+    _.each(console.log));
+
 
 </script>
 
