@@ -154,6 +154,22 @@ undefined -> 백에도 넘길 수 없음. 이 값이 나오면 안 되도록 구
 </script>
 
 8. indexBy
+
+<script>
+    console.clear();
+    const users = [
+        {id: 5, name: 'AA', age: 35},
+        {id: 10, name: 'BB', age: 35},
+        {id: 19, name: 'CC', age: 35},
+        {id: 23, name: 'DD', age: 35},
+        {id: 24, name: 'EE', age: 35},
+    ]
+
+    _.indexBy = (f, iter) => _.reduce((obj, a) => obj[f(a)] = a, {}, iter)
+    console.log(_.index_by(u => u.id, users));
+
+
+</script>
 9. indexBy 된 값을 filter 하기
 </body>
 </html>
