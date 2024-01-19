@@ -92,7 +92,7 @@
             console.log(`http://..?page=${page}`);
             return _.delay(1000 * 2, Impt.payments[page]);
         },
-        cancelPayment: uId => Promise.resolve(`${uId_id}: 취소완료`)
+        cancelPayment: uId => Promise.resolve(`${uId}: 취소완료`)
     };
 
     const DB = {
@@ -119,16 +119,26 @@
             DB.getOrders,
             _.map(({id}) => id));
 
-        _.go(
+        // 결제 취소 api를 진행한다.
+        await _.go(
             payments,
             _.reject(p => orderIds.includes(p.oId)),
-            console.log
-        )
+            L.map(p => p.uId),
+            L.map(Impt.cancelPayment),
+            _.each(console.log));
 
     }
 
-    job();
+    // 5초에 한 번만 한다.
+    // 그런데 만일 job 5초보다 더 걸리면, job이 끝날 때 까지.
+    (function recur() {
+        Promise.all([
+            _.delay(8000, undefined),
+            job()
+        ]).then(recur);
+    }) ();
 
 </script>
+
 </body>
 </html>
