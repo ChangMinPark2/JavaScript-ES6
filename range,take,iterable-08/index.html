@@ -88,7 +88,35 @@
             4: [],
             5: [],
         },
+        getPayments: page => {
+            console.log(`http://..?page=${page}`);
+            return _.delay(1000 * 2, Impt.payments[page]);
+        },
+        cancelPayment: uId => Promise.resolve(`${uId_id}: 취소완료`)
+    };
+
+    const DB = {
+        getOrders: ids => _.delay(100, [
+            {id:1},
+            {id:3},
+            {id:7}
+        ])
+    };
+
+    async function job() {
+        // 결제된 결제모듈측 payments를 가져온다.
+        // page 단위로 가져오는데, 하나로 합친다.
+        // 결제 데이터가 있을 때까지 모두 가져와서 하나로 합친다.
+      const payments = _.go(
+        L.range(1, Infinity),
+        L.map(Impt.getPayments),
+        L.takeUntil(({length}) => length < 3),
+        _.each(console.log)
+      );
     }
+
+    job();
+
 </script>
 </body>
 </html>
