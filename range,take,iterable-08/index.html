@@ -111,8 +111,20 @@
         L.range(1, Infinity),
         L.map(Impt.getPayments),
         L.takeUntil(({length}) => length < 3),
-        _.each(console.log)
-      );
+        _.flat);
+
+        const orderIds = await _.go(
+            payments,
+            _.map(p => p.oId),
+            DB.getOrders,
+            _.map(({id}) => id));
+
+        _.go(
+            payments,
+            _.reject(p => orderIds.includes(p.oId)),
+            console.log
+        )
+
     }
 
     job();
