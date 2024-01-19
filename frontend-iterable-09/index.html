@@ -33,5 +33,20 @@
     const b = 5;
     console.log(`${a} + ${b} = ${a / b}`);
 </script>
+
+<script>
+    const Images = {};
+
+    Images.fetch = () => new Promise(resolve => setTimeout(() => resolve([
+        {name: "HEART", url: "google.png"}
+    ]), 200));
+
+    Images.tmpl = imgs => `이미지들`;
+
+    _.go(
+        Images.fetch(),
+        Images.tmpl,
+        console.log);
+</script>
 </body>
 </html>
